@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Apurvaa!</title>
+		<style>
+			body {
+				font-family: "Arial", sans-serif;
+				text-align: center;
+				margin: 50px;
+				background-color: #f9f9f9;
+				color: #333;
+			}
+
+			h1 {
+				color: #e84a5f;
+			}
+
+			button {
+				padding: 15px 30px;
+				font-size: 18px;
+				margin: 20px;
+				cursor: pointer;
+				background-color: #e84a5f;
+				color: #fff;
+				border: none;
+				border-radius: 5px;
+				transition: background-color 0.3s, transform 0.2s;
+			}
+
+			button:hover {
+				background-color: #c23648;
+				transform: scale(1.05);
+			}
+
+			#message {
+				display: none;
+				margin-top: 20px;
+				font-size: 18px;
+				background-color: #e84a5f;
+				color: #fff;
+				padding: 20px;
+				border-radius: 5px;
+			}
+
+			@media (max-width: 600px) {
+				h1 {
+					font-size: 1.8em;
+				}
+
+				button {
+					font-size: 16px;
+					margin: 15px;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="questionSection">
+			<h1>Oee Apoorva! Mala tula bheataicha ahe🙄. Bheatshil?</h1>
+			<button
+				onclick="askApoorva('How about a romantic dinner under the stars?')"
+			>
+				Yes
+			</button>
+			<button onclick="askAgain()" id="noButton">No</button>
+		</div>
+
+		<div id="message"></div>
+
+		<script>
+			let noButtonState = 0;
+
+			function askApoorva(question) {
+				displayMessage(
+					"Mala call kar!! makade 😬 3 vaje paryanta jaga hoto hoto. kup vel lagle he website banvaila tujaya sathi",
+					"And I'm sorry for being rude and egoistic!😶 Majaya kade fakta 4-5 divas ahe! Don't wanna regret it.🙄"
+				);
+			}
+
+			function askAgain() {
+				let noButton = document.getElementById("noButton");
+				let yesButton = document.querySelector("button");
+
+				switch (noButtonState) {
+					case 0:
+						noButton.innerText = "Are you sure?";
+						break;
+					case 1:
+						noButton.innerText =
+							"Bhag bar ka? 🙄 mi ego bajula thevun vicharto ayy.";
+						break;
+					case 2:
+						noButton.innerText = "Mag mi kharach ni vicharnar parat. chalel?";
+						break;
+					case 3:
+						noButton.innerText =
+							"😏😏 kevdha attitude ahe re tujaya kade. ho bolaila ky jata?";
+						break;
+					case 4:
+						noButton.innerText = "😑 me evdha convience konalach ni karat";
+						break;
+					case 5:
+						noButton.innerText = "😟 Please bollo tari pan nai?";
+						break;
+					case 6:
+						// Display a single button and hide the 'No' button
+						yesButton.style.display = "inline-block";
+						yesButton.innerText = "You will come";
+						noButton.style.display = "none";
+						break;
+				}
+
+				// Increase the size of the Yes button
+				yesButton.style.transform = `scale(${1.05 + 0.09 * noButtonState})`;
+				noButtonState++;
+
+				if (noButtonState === 7) {
+					// Hide 'No' button after the 6th case
+					noButton.style.display = "none";
+				}
+			}
+
+			function displayMessage(title, text) {
+				document.getElementById(
+					"message"
+				).innerHTML = `<h2>${title}</h2><p>${text}</p>`;
+				document.getElementById("message").style.display = "block";
+				document.getElementById("questionSection").style.display = "none";
+			}
+
+			function thankYou() {
+				alert("Thank you for accepting! Looking forward to our date!");
+			}
+		</script>
+	</body>
+</html>
